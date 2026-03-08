@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chats</title>
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    background:#f4f6f8;
+    margin:0;
+}
+
+/* CREATE CHAT SECTION */
+
+.create-section{
+    background:#fff3cd;
+    padding:30px;
+    border-bottom:4px solid #ff9800;
+}
+
+.create-title{
+    font-size:28px;
+    color:#d62828;
+    margin-bottom:15px;
+}
+
+/* NEW CHAT BUTTON */
+
+.new-chat-btn{
+    background:#28a745;
+    color:white;
+    border:none;
+    padding:10px 20px;
+    border-radius:8px;
+    font-size:15px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.new-chat-btn:hover{
+    background:#218838;
+}
+
+/* ALL CHAT SECTION */
+
+.chat-section{
+    padding:30px;
+}
+
+.chat-title{
+    font-size:28px;
+    margin-bottom:20px;
+}
+
+/* CHAT GRID */
+
+.chat-container{
+    display:flex;
+    flex-wrap:wrap;
+    gap:20px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+<!-- CREATE NEW CHAT SECTION -->
+
+<div class="create-section">
+
+<h2 class="create-title">Create a new chat</h2>
+
+<form action="/chats/new" method="GET">
+<button class="new-chat-btn">New Chat</button>
+</form>
+
+</div>
+
+
+
+<!-- ALL CHATS SECTION -->
+
+<div class="chat-section">
+
+<h2 class="chat-title">All Chats</h2>
+
+<div class="chat-container">
+
+<% for(let chat of chats) { %>
+
+<div class="chat">
+
+<p>From: <b><%= chat.from %></b></p>
+
+<p class="msg">Message: <%= chat.msg %></p>
+
+<form method="get" action="/chats/<%= chat._id %>/edit">
+<button style="
+background:#83db1e;
+color:white;
+border:none;
+padding:6px 14px;
+border-radius:6px;
+cursor:pointer;
+font-weight:bold;
+font-size:13px;
+margin-top:5px;
+">edit</button>
+</form>
+
+<br>
+
+<form method="post" action="/chats/<%= chat._id %>?_method=DELETE">
+<button style="
+background:#e63946;
+color:white;
+border:none;
+padding:6px 14px;
+border-radius:6px;
+cursor:pointer;
+font-weight:bold;
+font-size:13px;
+margin-top:5px;
+">Delete</button>
+</form>
+
+<p>To: <b><%= chat.to %></b></p>
+
+<hr>
+
+<p><%= chat.created_at.toString().split(" ")[4] %></p>
+
+<p><%= chat.created_at.toString().split(" ").slice(1,4).join(" - ") %></p>
+
+</div>
+
+<% } %>
+
+</div>
+
+</div>
+
+
+</body>
+</html>
