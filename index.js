@@ -19,7 +19,10 @@ main()
   .catch((err) => console.log(err));
 
 async function main() {
-  await mongoose.connect(process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/whatsapp");
+  await mongoose.connect(process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/whatsapp", {
+    serverSelectionTimeoutMS: 30000,
+    socketTimeoutMS: 45000,
+  });
 };
 
 // let chat1= new Chat({
