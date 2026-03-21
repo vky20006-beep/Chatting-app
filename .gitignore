@@ -1,3 +1,16 @@
 node_modules/
 .env
 .DS_Store
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# IDE-specific files
+.vscode/
+.idea/
+
+# Build files
+dist/
+build/
